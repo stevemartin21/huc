@@ -2,10 +2,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 import { AppComponent } from './app.component';
+import { HttpClientModule} from '@angular/common/http';
 
 import { MDBSpinningPreloader, MDBBootstrapModulesPro, ToastModule } from 'ng-uikit-pro-standard';
 import { DashboardComponent } from './adminComponents/dashboard/dashboard.component';
@@ -23,6 +24,9 @@ import { LoginComponent } from './authenAuthorComponents/login/login.component';
 import { WebSiteRoutingModule } from './web-site-routing.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminNavigationComponent } from './adminComponents/admin-navigation/admin-navigation.component';
+import { AddServiceComponent } from './adminComponents/add-service/add-service.component';
+import { ManageServicesComponent } from './adminComponents/manage-services/manage-services.component';
+import { AdminFooterComponent } from './adminComponents/admin-footer/admin-footer.component';
 
 @NgModule({
   declarations: [
@@ -39,13 +43,18 @@ import { AdminNavigationComponent } from './adminComponents/admin-navigation/adm
     AddChurchComponent,
     ManageChurchesComponent,
     LoginComponent,
-    AdminNavigationComponent
+    AdminNavigationComponent,
+    AddServiceComponent,
+    ManageServicesComponent,
+    AdminFooterComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     ToastModule.forRoot(),
     MDBBootstrapModulesPro.forRoot(),
     AgmCoreModule.forRoot({
