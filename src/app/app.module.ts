@@ -8,10 +8,38 @@ import { AgmCoreModule } from '@agm/core';
 import { AppComponent } from './app.component';
 
 import { MDBSpinningPreloader, MDBBootstrapModulesPro, ToastModule } from 'ng-uikit-pro-standard';
+import { DashboardComponent } from './adminComponents/dashboard/dashboard.component';
+import { HomeComponent } from './webSiteComponents/home/home.component';
+import { RegisterComponent } from './authenAuthorComponents/register/register.component';
+import { NavigationComponent } from './webSiteComponents/navigation/navigation.component';
+import { FooterComponent } from './webSiteComponents/footer/footer.component';
+import { JumbotronComponent } from './webSiteComponents/jumbotron/jumbotron.component';
+import { FeaturesComponent } from './webSiteComponents/features/features.component';
+import { ProjectsComponent } from './webSiteComponents/projects/projects.component';
+import { ContactComponent } from './webSiteComponents/contact/contact.component';
+import { AddChurchComponent } from './adminComponents/add-church/add-church.component';
+import { ManageChurchesComponent } from './adminComponents/manage-churches/manage-churches.component';
+import { LoginComponent } from './authenAuthorComponents/login/login.component';
+import { WebSiteRoutingModule } from './web-site-routing.module';
+import { AdminRoutingModule } from './admin-routing.module';
+import { AdminNavigationComponent } from './adminComponents/admin-navigation/admin-navigation.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent,
+    HomeComponent,
+    RegisterComponent,
+    NavigationComponent,
+    FooterComponent,
+    JumbotronComponent,
+    FeaturesComponent,
+    ProjectsComponent,
+    ContactComponent,
+    AddChurchComponent,
+    ManageChurchesComponent,
+    LoginComponent,
+    AdminNavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +51,9 @@ import { MDBSpinningPreloader, MDBBootstrapModulesPro, ToastModule } from 'ng-ui
     AgmCoreModule.forRoot({
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en#key
       apiKey: 'Your_api_key'
-    })
+    }),
+    WebSiteRoutingModule,
+    AdminRoutingModule
   ],
   providers: [MDBSpinningPreloader],
   bootstrap: [AppComponent],
