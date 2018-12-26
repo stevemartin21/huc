@@ -9,6 +9,5 @@ export interface Church {
   city: String;
   county: String;
   imagePath: String;
-  services:  Service[];
 }
 

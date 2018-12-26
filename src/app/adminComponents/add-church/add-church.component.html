@@ -11,17 +11,17 @@
           <div class="container flex-center">
               <div class="d-flex align-items-center w-100">
                   <div class="row flex-center w-100">
-                      <div class="col-md-6 text-center text-md-left mb-5">
+                      <div class="col-md-4 text-center text-md-left mb-5">
                           <div class="white-text">
                               <h2 class="h1 display-4 wow fadeInLeft" data-wow-delay="0.3s">Add Church</h2>
                               <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
-                              <h6 class="wow fadeInLeft" data-wow-delay="0.3s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi fuga nesciunt dolorum nulla magnam veniam sapiente, fugiat! Commodi sequi non animi ea dolor molestiae, quisquam iste.</h6>
+
                               <br>
-                              <a class="btn elegant-color wow fadeInLeft waves-light" data-wow-delay="0.3s" mdbWavesEffect>Learn more</a>
+
                           </div>
                       </div>
 
-                      <div class="col-md-6 col-xl-5 offset-xl-1">
+                      <div class="col-md-8 col-xl-7 offset-xl-1">
                           <!--Form-->
                           <div class="card wow fadeInRight" data-wow-delay="0.3s">
                               <div class="card-body z-depth-2">
@@ -32,33 +32,52 @@
                                   </div>
                                   <form [formGroup]='form' (submit)="onSaveChurch()">
                                   <!--Body-->
+                                  <div class='row'>
 
-                                  <div class="md-form">
-                                      <i class="fa fa-envelope prefix grey-text"></i>
-                                      <input type="text" id="form2" class="form-control" mdbInputDirective formControlName="title" >
-                                      <label for="form2">Title</label>
-                                  </div>
+                                    <div class='col-6'>
 
-                                  <div class="md-form">
-                                    <i class="fa fa-lock prefix grey-text"></i>
-                                    <input type="text" id="form3" class="form-control" mdbInputDirective formControlName="year" >
-                                    <label for="form3">Year Built</label>
-                                </div>
+                                        <div class="md-form">
+                                            <input type="text" id="form2" class="form-control" placeholder="Title"  mdbInputDirective formControlName="title" >
+                                        </div>
+                                      </div>
+                                      <div class='col-6'>
+                                        <div class="md-form">
+                                          <input type="text" id="form3" class="form-control" placeholder="Year Built"  mdbInputDirective formControlName="year" >
+                                      </div>
+                                    </div>
+                              </div>
 
+                              <div class='row'>
+                                <div class='col-6'>
                                 <div class="md-form">
-                                  <i class="fa fa-lock prefix grey-text"></i>
-                                  <input type="text" id="form3" class="form-control" mdbInputDirective formControlName="city" >
-                                  <label for="form3">City</label>
+                                  <input type="text" id="form3" class="form-control" placeholder="City"  mdbInputDirective formControlName="city" >
                               </div>
+                            </div>
+                            <div class='col-6'>
+                              <div class="md-form">
+                                <input type="text" id="form3" class="form-control" placeholder="County"  mdbInputDirective formControlName="county" >
+                            </div>
+                          </div>
+                          </div>
 
-                                <div class="row pt-3 pb3">
+                                <div class="row pt-3 pb-3">
                                   <div class="col-md-12">
-                                      <mdb-select [options]='typeSelect' placeholder="Choose your option" class="colorful-select dropdown-primary" formControlName='denomination'></mdb-select>
-                                      <label>Denomination</label>
+                                      <mdb-select [options]='typeSelect' placeholder="Choose Denomination" class="colorful-select dropdown-primary" formControlName='denomination'></mdb-select>
+
                                   </div>
                               </div>
 
-                              <textarea class='form-control  mb-3 pt-3 pb-3 ' rows="10" formControlName="history" placeholder="History"></textarea>
+                          <div class=' pt-3 pb-3'>
+                            <button class='btn btn-elegant' type="button" (click)="filePicker.click()">Pick Image</button>
+                            <input type="file" #filePicker (change)="onImagePicked($event)">
+                        </div>
+                        <div class="image-preview  mb-3  pt-3 pb-3" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
+                            <img [src]="imagePreview" [alt]="form.value.title">
+                        </div>
+
+
+
+                              <textarea class='form-control  mb-3 pt-3 pb-3 ' rows="5" formControlName="history" placeholder="History"></textarea>
                                   <div class="text-center">
                                       <button class="btn elegant-color waves-light" type='submit' mdbWavesEffect>Submit</button>
                                       <hr>
@@ -76,6 +95,6 @@
   </section>
 
 </header>
-<!--Main Navigation-->
+<!--Main Navigation should be copete-->
 
 <app-admin-footer></app-admin-footer>
