@@ -3,8 +3,10 @@ var router = express.Router();
 
 var bcrypt = require('bcryptjs');
 var passport = require('passport');
+const jwt = require('jsonwebtoken');
 
 var Church = require('../models/church');
+var User = require('../models/user');
 
 const multer = require("multer");
 
@@ -70,8 +72,82 @@ router.post( "/church",
   }
 );
 
-router.get('/', (req, res) => {
-  console.log('worked')
-})
+//  create new User
+
+router.post('/user', (req, res) => {
+  User.findOne({email: req.body.email}).then(user => {
+    console.log('User 1')
+    if(user){
+     return  res.json({message: 'There is alread a user with that email'})
+    } else {
+      console.log(req.body, '1');
+      const newUser = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+      })
+
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+
+          if (err) throw err;
+          newUser.password = hash;
+          console.log('2')
+          newUser.save().then(createdUser => {
+            console.log('3')
+            res.status(201).json({
+              message: "User added successfully",
+              user: {
+                ...createdUser,
+                id: createdUser._id
+              }
+            })
+          })
+
+        })
+      })
+    }
+  })
+});
+
+//  Create a token
+
+router.post('/token', (req, res) => {
+  let fetchedUser;
+
+  User.findOne({email: req.body.email}).then(user => {
+        if(!user){
+          return res.status(400).json({message: 'There is no user with that email address'})
+        }
+          fetchedUser = user;
+          return bcrypt.compare(req.body.password, user.password)
+    }).then(result => {
+      if(!result){
+        res.status(401).json({message: 'The passwords do not match'
+        })
+      } else {
+        const token = jwt.sign(
+          { email: fetchedUser.email, userId: fetchedUser._id , name: fetchedUser.name },
+          "secret_this_should_be_longer" ,
+          { expiresIn: "1h" }
+        );
+        console.log(token);
+        res.status(200).json({
+          message: 'Congrats You have logged in',
+          token: token,
+          expiresIn: 3600,
+          userId: fetchedUser._id
+        });
+      }
+    }).catch(err => {
+      return res.status(401).json({
+        message: "Authorization failed"
+      });
+    });
+  });
+
+
+
+
 
 module.exports = router;

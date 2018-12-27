@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
       this.form.value.email,
       this.form.value.password
        );
+       this.form.reset();
   }
 
 }
