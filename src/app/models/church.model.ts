@@ -1,7 +1,7 @@
 import { Service } from './services.model';
 
 export interface Church {
-  id: String;
+  _id: String;
   title: String;
   history: String;
   year: String;

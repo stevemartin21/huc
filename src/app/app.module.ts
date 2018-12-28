@@ -3,10 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+// import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 import { AppComponent } from './app.component';
 import { HttpClientModule} from '@angular/common/http';
+import { RouteGuard } from './authenAuthorComponents/route-guard';
 
 import { MDBSpinningPreloader, MDBBootstrapModulesPro, ToastModule } from 'ng-uikit-pro-standard';
 import { DashboardComponent } from './adminComponents/dashboard/dashboard.component';
@@ -27,6 +28,7 @@ import { AdminNavigationComponent } from './adminComponents/admin-navigation/adm
 import { AddServiceComponent } from './adminComponents/add-service/add-service.component';
 import { ManageServicesComponent } from './adminComponents/manage-services/manage-services.component';
 import { AdminFooterComponent } from './adminComponents/admin-footer/admin-footer.component';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,7 @@ import { AdminFooterComponent } from './adminComponents/admin-footer/admin-foote
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    // HttpModule
     HttpClientModule,
     ToastModule.forRoot(),
     MDBBootstrapModulesPro.forRoot(),
@@ -64,7 +66,7 @@ import { AdminFooterComponent } from './adminComponents/admin-footer/admin-foote
     WebSiteRoutingModule,
     AdminRoutingModule
   ],
-  providers: [MDBSpinningPreloader],
+  providers: [RouteGuard, MDBSpinningPreloader],
   bootstrap: [AppComponent],
   schemas:      [ NO_ERRORS_SCHEMA ]
 })

@@ -30,6 +30,8 @@ export class CreateDataService {
     return this.authStatus.asObservable();
   }
 
+
+
   createUser(_id: null, name: string, email: string, password: string) {
     const newUser: User =  {
       _id: _id,
@@ -63,7 +65,7 @@ export class CreateDataService {
           this.isAuthenticated = true;
           this.authStatus.next(true);
           this.router.navigate(['/dashboard']);
-          this.setLocalStorage(token, response.expiresIn);
+          this.setLocalStorage(token);
         }
 
       }, Error => {
@@ -77,6 +79,8 @@ export class CreateDataService {
     this.isAuthenticated = false;
     this.authStatus.next(false);
     this.clearLocalStorage();
+    console.log('You have logged out');
+    console.log(this.isAuthenticated);
     this.router.navigate(['/']);
   }
 
@@ -94,7 +98,7 @@ export class CreateDataService {
 
 
 
-  createChurch (title: string, year: string, denomination: string, city: string, county: string, history: string, image: file) {
+  createChurch (title: string, year: string, denomination: string, city: string, county: string, history: string, image: string) {
 
     const postData = new FormData();
     postData.append('title', title);
